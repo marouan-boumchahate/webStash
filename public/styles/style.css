@@ -1,0 +1,612 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0px;
+  background: #000000;
+  font-family: "Comic Relief", system-ui;
+  font-style: normal;
+	line-height: 1.5em;
+}
+
+@media (max-width: 768px) {
+  body {
+    width: auto;
+    height: auto;
+  }
+}
+/* ----------> Confirm Delete Card <---------- */
+.confirm-delete-card {
+  position: fixed;
+  top: 33%;
+  left: 33%;
+  z-index: 10;
+  background: linear-gradient(#212121, #212121) padding-box,
+  linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
+  
+  border-radius: 20px;
+  width: 35%;
+  display: none;
+}
+/* ------------------------------------------- */
+
+
+
+/* -------------> ADD/EDIT Card <------------- */
+.form-container {
+  position: fixed;
+  top: 3%;
+  left: 35%;
+  width: 400px;
+  background: linear-gradient(#212121, #212121) padding-box,
+              linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
+  border: 2px solid transparent;
+  padding: 32px 24px;
+  font-size: 14px;
+  font-family: inherit;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  z-index: 10;
+  display: none;
+}
+
+.form-container button:active {
+  scale: 0.95;
+}
+
+.form-container .form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-container .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form-container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #717171;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.form-container .form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  background-color: transparent;
+  border: 1px solid #414141;
+}
+
+.form-container .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  resize: none;
+  color: #fff;
+  height: 96px;
+  border: 1px solid #414141;
+  background-color: transparent;
+  font-family: inherit;
+}
+
+.form-container .form-group input::placeholder {
+  opacity: 0.5;
+}
+
+.form-container .form-group input:focus {
+  outline: none;
+  border-color: #e81cff;
+}
+
+.form-container .form-group textarea:focus {
+  outline: none;
+  border-color: #e81cff;
+}
+
+.form-container .form-submit-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  font-family: inherit;
+  color: #717171;
+  font-weight: 600;
+  width: 40%;
+  background: #313131;
+  border: 1px solid #414141;
+  padding: 12px 16px;
+  font-size: inherit;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.form-container .form-submit-btn:hover {
+  background-color: #fff;
+  border-color: #fff;
+}
+/* ------------------------------------------- */
+
+
+/* -------------> Message Error <------------- */
+.message {
+  position: fixed;
+  top: 2%;
+  left: 30%;
+  width: 35%;
+  height: 50px;
+  border-radius: 25px;
+  background: rgb(255, 255, 255);
+  color: #c71c1c;
+  border: #c71c1c 3px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 1;
+	transition: opacity 2s ease-out;
+}
+
+.message.hide{
+  opacity: 0;
+}
+
+.message p{
+  margin-top: 10px;
+  font-weight: 600;
+}
+/* ------------------------------------------- */
+
+
+
+/* ----------------> Bluring <---------------- */
+#blurOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  display: none;
+}
+/* ------------------------------------------- */
+
+
+
+/* ---------> Authentication Card <----------- */
+#passwordModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  transform: translate(-50%, -50%);
+  background: rgb(57, 62, 71);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  display: none;
+}
+
+.passwordModal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.passwordModal-content .input {
+  margin-bottom: 30px;
+  background: none;
+  border: none;
+  outline: none;
+  max-width: 250px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: #fff;
+}
+
+.passwordModal-content button {
+  max-width: 150px;
+  background: linear-gradient(to bottom, #1b1c3f, #4a4e91);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: button-shimmer 2s infinite;
+  transition: all 0.3s ease-in-out;
+}
+
+.passwordModal-content button:hover {
+  background: linear-gradient(to bottom, #2c2f63, #5b67b7);
+  animation: button-particles 1s ease-in-out infinite;
+  transform: translateY(-2px);
+}
+
+@keyframes button-shimmer {
+  0% {
+    background-position: left top;
+  }
+
+  100% {
+    background-position: right bottom;
+  }
+}
+
+@keyframes button-particles {
+  0% {
+    background-position: left top;
+  }
+
+  100% {
+    background-position: right bottom;
+  }
+}
+/* ------------------------------------------- */
+
+
+.home-icon {
+  width: 40px;
+	transform: scale(1);
+	transition: all 0.25s ease-out;
+  position: relative;
+  top: 20%;
+  left: 5%;
+}
+
+.home-icon:hover {
+  transform: scale(1.1);
+}
+
+/* ---------> Authentication Icon <----------- */
+#openModalBtn:hover {
+  cursor: pointer;
+}
+
+.login {
+	position: relative;
+	top: 15%;
+	left: 75%;
+	width: 50px;
+	transform: scale(1);
+	transition: all 0.25s ease-out;
+}
+
+.login svg {
+	border: whitesmoke 2px solid;
+	border-radius: 50%;
+}
+
+.login:hover {
+	transform: scale(1.1);
+}
+/* ------------------------------------------- */
+
+
+/* --------------> Close Icon <--------------- */
+.cross {
+  width: 40px;
+	position: absolute;
+	top: 1%;
+	right: 1%;
+	transform: scale(1);
+	transition: all 0.25s ease-out;
+}
+
+.cross:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+/* ------------------------------------------- */
+
+
+/* --------------> Search Bar <--------------- */
+.my-form, .search-bar {
+  display: flex;
+}
+
+.my-form, input {
+	color: #171717;
+}
+
+.search-bar input,
+.search-btn, 
+.search-btn:before, 
+.search-btn:after {
+	transition: all 0.25s ease-out;
+}
+.search-bar input,
+.search-btn {
+	width: 3em;
+	height: 3em;
+}
+.search-bar input:invalid:not(:focus),
+.search-btn {
+	cursor: pointer;
+}
+.search-bar,
+.search-bar input:focus,
+.search-bar input:valid  {
+	width: 100%;
+}
+.search-bar input:focus,
+.search-bar input:not(:focus) + .search-btn:focus {
+	outline: transparent;
+}
+.search-bar {
+	margin: auto;
+	padding: 1.5em;
+	justify-content: center;
+	max-width: 30em;
+}
+.search-bar input {
+	background: transparent;
+	border-radius: 1.5em;
+	box-shadow: 0 0 0 0.4em #171717 inset;
+	padding: 0.75em;
+	transform: translate(0.5em,0.5em) scale(0.5);
+	transform-origin: 100% 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.search-bar input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+.search-bar input:focus,
+.search-bar input:valid {
+	background: #fff;
+	border-radius: 0.375em 0 0 0.375em;
+	box-shadow: 0 0 0 0.1em #d9d9d9 inset;
+	transform: scale(1);
+}
+.search-btn {
+	background: #171717;
+	border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
+	padding: 0.75em;
+	position: relative;
+	transform: translate(0.25em,0.25em) rotate(45deg) scale(0.25,0.125);
+	transform-origin: 0 50%;
+}
+.search-btn:before, 
+.search-btn:after {
+	content: "";
+	display: block;
+	opacity: 0;
+	position: absolute;
+}
+.search-btn:before {
+	border-radius: 50%;
+	box-shadow: 0 0 0 0.2em #f1f1f1 inset;
+	top: 0.75em;
+	left: 0.75em;
+	width: 1.2em;
+	height: 1.2em;
+}
+.search-btn:after {
+	background: #f1f1f1;
+	border-radius: 0 0.25em 0.25em 0;
+	top: 51%;
+	left: 51%;
+	width: 0.75em;
+	height: 0.25em;
+	transform: translate(0.2em,0) rotate(45deg);
+	transform-origin: 0 50%;
+}
+.search-btn span {
+	display: inline-block;
+	overflow: hidden;
+	width: 1px;
+	height: 1px;
+}
+
+/* Active state */
+.search-bar input:focus + .search-btn,
+.search-bar input:valid + .search-btn {
+	background: #2762f3;
+	border-radius: 0 0.375em 0.375em 0;
+	transform: scale(1);
+}
+.search-bar input:focus + .search-btn:before, 
+.search-bar input:focus + .search-btn:after,
+.search-bar input:valid + .search-btn:before, 
+.search-bar input:valid + .search-btn:after {
+	opacity: 1;
+}
+.search-bar input:focus + .search-btn:hover,
+.search-bar input:valid + .search-btn:hover,
+.search-bar input:valid:not(:focus) + .search-btn:focus {
+	background: #0c48db;
+}
+.search-bar input:focus + .search-btn:active,
+.search-bar input:valid + .search-btn:active {
+	transform: translateY(1px);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	body, input {
+		color: #f1f1f1;
+	}
+	body {
+		background: #171717;
+	}
+	.search-bar input {
+		box-shadow: 0 0 0 0.4em #f1f1f1 inset;
+	}
+	.search-bar input:focus,
+	.search-bar input:valid {
+		background: #3d3d3d;
+		box-shadow: 0 0 0 0.1em #3d3d3d inset;
+	}
+	.search-btn {
+		background: #f1f1f1;
+	}
+}
+/* ------------------------------------------- */
+
+
+/* --------------> Webstash Cards <--------------- */
+.my-card {
+  width: 190px;
+  height: 254px;
+  border-radius: 20px;
+  background: #d8d3d3;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+}
+
+.my-add-card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: scale(1);
+	transition: 0.2s ease-out;
+}
+
+.my-add-card:hover {
+	transform: scale(1.05);
+}
+
+.my-card-details {
+  color: black;
+  height: 100%;
+  gap: .2em;
+  display: grid;
+  place-content: center;
+  margin: 5px;
+  font-size: 1em;
+}
+
+.my-card-button {
+  transform: translate(-50%, 125%);
+  width: 25%;
+  border-radius: 50%;
+  border: none;
+  background-color: #688aa3;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-card-button:hover {
+  background-color: #50a3de;
+}
+
+.my-card-button-1 {
+  position: absolute;
+  left: 20%;
+}
+
+.my-card-button-2 {
+  position: absolute;
+  left: 50%;
+}
+
+.my-card-button-3 {
+  position: absolute;
+  left: 80%;
+}
+
+.my-text-body {
+  color: rgb(134, 134, 134);
+}
+
+/*Text*/
+.my-text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/*Hover*/
+.my-card:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.my-card:hover .my-card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+/* ----------------------------------------------- */
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#social-test {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 30px;
+  h2 {
+    color: #fff;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-weight: 100;
+  }
+  .social {
+    padding-left: 0px;
+  }
+  li {
+    color: rgba(167, 146, 129, 0.6);
+    list-style-type: none;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 1%;
+    border: 1px solid rgba(167, 146, 129, 0.4);
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    transition: ease .3s;
+    &:hover {
+      color: rgba(167, 146, 129, 1);
+      border: 1px solid rgba(167, 146, 129, 1);
+    }
+  }
+}
+
+.social:hover > li {
+  opacity: 0.5;
+}
+
+.social:hover > li:hover {
+  opacity: 1;
+}
