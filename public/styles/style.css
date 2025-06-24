@@ -156,8 +156,9 @@ body {
 .message {
   position: fixed;
   top: 2%;
-  left: 30%;
-  width: 35%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  width: 40%;
   height: 50px;
   border-radius: 25px;
   background: rgb(255, 255, 255);
@@ -178,6 +179,7 @@ body {
 .message p{
   margin-top: 10px;
   font-weight: 600;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
 }
 /* ------------------------------------------- */
 

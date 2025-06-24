@@ -90,6 +90,20 @@ function responsiveConfirmDeleteCard(){
 // -------------------------------------------------------
 
 
+// ---------------- Error Message Card -------------------
+function responsiveErrorMessageCard(){
+  const width = window.innerWidth;
+  const Form = document.getElementById("msg");
+
+  if(!Form) return;
+  
+  const formWidth = 100 - ((Math.floor(width / 250) + 1) * 10);
+  
+  Form.style.width = `${formWidth}%`;
+}
+// -------------------------------------------------------
+
+
 // ---------------- Responsive Handler -------------------
 function responsive(){
   responsiveHeader();
@@ -97,6 +111,7 @@ function responsive(){
   responsiveAddEditCard("add-form");
   responsiveAddEditCard("edit-form");
   responsiveConfirmDeleteCard();
+  responsiveErrorMessageCard();
 }
 // -------------------------------------------------------
 
