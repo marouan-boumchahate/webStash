@@ -4,15 +4,18 @@ import db from './db.js';
 import bcrypt from 'bcrypt';
 import { promisify } from "util";
 import session from "express-session";
+import env from "dotenv";
 
 const app = express();
 const PORT = 8081;
 
 
+env.config();
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.use(session({
-    secret: "Something",
+    secret: process.env.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: {

@@ -27,8 +27,8 @@
         <!-- ------------------------------------------ Authentication Card ------------------------------------------- -->
         <div id="passwordModal">
             <form class="passwordModal-content" action="/auth" method="post">
-                <input placeholder="enter admin password" class="input" name="password" type="password">
-                <button type="submit">Authenticate</button>
+                <input id="authentication-password" placeholder="enter admin password" class="input" name="password" type="password">
+                <button id="authentication-btn" type="submit">Authenticate</button>
             </form>
             <div class="cross" id="closeModal">
                 <svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M511.881216 929.554432c230.109184 0 416.649216-186.540032 416.649216-416.649216S741.9904 96.256 511.881216 96.256 95.232 282.796032 95.232 512.905216s186.540032 416.649216 416.649216 416.649216" fill="#ff0000"></path><path d="M698.098688 376.60672L551.447552 523.256832l144.979968 144.979968c5.0688 5.0688 7.891968 11.782144 7.94624 18.905088 0.057344 7.221248-2.720768 14.006272-7.82336 19.10784 0.002048 0.003072-0.001024 0.004096-0.003072 0.004096-4.943872 4.943872-11.829248 7.774208-18.907136 7.774208h-0.113664c-7.185408-0.03072-13.93152-2.835456-18.993152-7.897088L513.553408 561.152 366.901248 707.805184c-5.506048 5.504-12.841984 8.55552-20.655104 8.589312h-0.123904c-7.70048 0-15.194112-3.08224-20.579328-8.46848l-0.004096-0.002048c-5.553152-5.554176-8.577024-12.939264-8.516608-20.799488 0.060416-7.74656 3.129344-15.049728 8.640512-20.558848l146.651136-146.65216-144.978944-144.979968c-5.0688-5.0688-7.891968-11.783168-7.947264-18.907136-0.05632-7.221248 2.722816-14.00832 7.827456-19.110912 4.941824-4.942848 11.8272-7.773184 18.907136-7.773184h0.11264c7.186432 0.03072 13.93152 2.833408 18.993152 7.89504L510.208 482.018304l146.65216-146.65216c5.506048-5.506048 12.843008-8.556544 20.65408-8.590336h0.124928c7.70048 0 15.19616 3.084288 20.5824 8.470528 5.552128 5.55008 8.578048 12.939264 8.516608 20.79744-0.059392 7.748608-3.12832 15.049728-8.640512 20.56192m79.434752 401.95072c-34.515968 34.516992-74.697728 61.611008-119.430144 80.530432-46.28992 19.57888-95.485952 29.507584-146.22208 29.507584-50.736128 0-99.93216-9.928704-146.223104-29.508608-44.731392-18.919424-84.913152-46.012416-119.42912-80.528384-34.515968-34.515968-61.609984-74.697728-80.530432-119.431168C146.11968 612.839424 136.192 563.641344 136.192 512.90624c0-50.736128 9.92768-99.93216 29.50656-146.223104 18.920448-44.731392 46.014464-84.914176 80.530432-119.42912 34.515968-34.515968 74.697728-61.609984 119.42912-80.530432C411.949056 147.14368 461.145088 137.216 511.881216 137.216s99.93216 9.928704 146.22208 29.50656c44.732416 18.920448 84.914176 46.014464 119.42912 80.530432 34.516992 34.514944 61.611008 74.698752 80.531456 119.42912 19.57888 46.291968 29.50656 95.488 29.50656 146.223104 0 50.736128-9.92768 99.93216-29.50656 146.22208-18.920448 44.731392-46.014464 84.9152-80.530432 119.431168M511.881216 96.256C281.772032 96.256 95.232 282.796032 95.232 512.904192 95.232 743.0144 281.772032 929.555456 511.881216 929.555456s416.649216-186.54208 416.649216-416.65024C928.530432 282.796032 741.9904 96.256 511.881216 96.256" fill="#000000"></path></g></svg>
@@ -92,7 +92,7 @@
         <!-- ------------------------------------------ Confirm Delete Card -------------------------------------------- -->
         <% if(openDelete && deleteID) {%>    
             <div class="container confirm-delete-card" id="delete-confirm-form">
-                <form class="d-flex justify-content-center align-items-center flex-column" action="/delete/<%= deleteID %>" method="post">
+                <form class="d-flex justify-content-center align-items-center flex-column text-center" action="/delete/<%= deleteID %>" method="post">
                     <div class="d-flex justify-content-center align-items-center flex-column pt-3">
                         <svg style="width: 50px;" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M724.3 198H296.1l54.1-146.6h320z" fill="#FAFCFB"></path><path d="M724.3 216.5H296.1c-6.1 0-11.7-3-15.2-7.9-3.5-5-4.3-11.3-2.2-17L332.8 45c2.7-7.3 9.6-12.1 17.4-12.1h320c7.7 0 14.7 4.8 17.4 12.1l54.1 146.6c2.1 5.7 1.3 12-2.2 17-3.5 4.9-9.2 7.9-15.2 7.9z m-401.6-37h375.1L657.3 69.9H363.1l-40.4 109.6z" fill="#0F0F0F"></path><path d="M664.3 981.6H339.7c-54.2 0-98.5-43.3-99.6-97.5L223.7 235h572.9l-32.8 651.4c-2.3 53.2-46.1 95.2-99.5 95.2z" fill="#9DC6AF"></path><path d="M664.3 995H339.7c-29.7 0-57.8-11.4-79-32.2-21.2-20.8-33.3-48.6-34-78.3L210 221.6h600.7L777.2 887c-2.6 60.5-52.2 108-112.9 108zM237.4 248.3l16 635.5c0.5 22.7 9.7 44 25.9 59.8 16.2 15.9 37.7 24.6 60.4 24.6h324.6c46.3 0 84.2-36.2 86.2-82.5l32.1-637.4H237.4z" fill="#191919"></path><path d="M827.1 239.5H193.3c-22.2 0-40.4-18.2-40.4-40.4v-2.2c0-22.2 18.2-40.4 40.4-40.4h633.8c22.2 0 40.4 18.2 40.4 40.4v2.2c0 22.2-18.2 40.4-40.4 40.4z" fill="#D39E33"></path><path d="M826 252.9H194.4c-30.3 0-54.9-24.6-54.9-54.9 0-30.3 24.6-54.9 54.9-54.9H826c30.3 0 54.9 24.6 54.9 54.9s-24.7 54.9-54.9 54.9z m-631.6-83.1c-15.5 0-28.2 12.6-28.2 28.2s12.6 28.2 28.2 28.2H826c15.5 0 28.2-12.6 28.2-28.2 0-15.5-12.6-28.2-28.2-28.2H194.4z" fill="#111111"></path><path d="M354.6 430.3v369.6" fill="#FAFCFB"></path><path d="M354.6 813.3c-7.4 0-13.4-6-13.4-13.4V430.3c0-7.4 6-13.4 13.4-13.4s13.4 6 13.4 13.4v369.6c-0.1 7.4-6 13.4-13.4 13.4z" fill="#0F0F0F"></path><path d="M458.3 430.3v369.6" fill="#FAFCFB"></path><path d="M458.3 813.3c-7.4 0-13.4-6-13.4-13.4V430.3c0-7.4 6-13.4 13.4-13.4s13.4 6 13.4 13.4v369.6c0 7.4-6 13.4-13.4 13.4z" fill="#0F0F0F"></path><path d="M562.1 430.3v369.6" fill="#FAFCFB"></path><path d="M562.1 813.3c-7.4 0-13.4-6-13.4-13.4V430.3c0-7.4 6-13.4 13.4-13.4s13.4 6 13.4 13.4v369.6c-0.1 7.4-6.1 13.4-13.4 13.4z" fill="#0F0F0F"></path><path d="M665.8 430.3v369.6" fill="#FAFCFB"></path><path d="M665.8 813.3c-7.4 0-13.4-6-13.4-13.4V430.3c0-7.4 6-13.4 13.4-13.4s13.4 6 13.4 13.4v369.6c0 7.4-6 13.4-13.4 13.4z" fill="#0F0F0F"></path></g></svg>
 
@@ -113,7 +113,7 @@
         <header class="container text-center mt-3">
             <!-- HOME ICON -->
             <div class="row">
-                <div class="col">
+                <div class="col d-flex justify-content-center align-items-center">
                     <div class="home-icon">
                         <a href="/">
                             <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z" fill="#ffffff"></path> </g></svg>
@@ -122,15 +122,15 @@
                 </div>
                     
                 <!-- PAGE TITLE -->
-                <div class="text-center col">
+                <div id="title" class="col d-flex justify-content-center align-items-center flex-column">
                     <h1 class="text-info" style="font-weight: 900;">
                         WebStash
                     </h1>
-                    <p style="font-size: x-large;">Save the Web That Matters</p>
+                    <p id="sub-title" style="font-size: x-large;">Save the Web That Matters</p>
                 </div>
                 
                 <!-- AUTHENTICATION ICON -->
-                <div class="col">
+                <div class="col d-flex justify-content-center align-items-center">
                     <% if(!authenticated) { %>
                         <div id="openModalBtn" class="login">
                             <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="512" cy="512" r="512" style="fill:#112e51"></circle> <path d="m458.15 617.7 18.8-107.3a56.94 56.94 0 0 1 35.2-101.9V289.4h-145.2a56.33 56.33 0 0 0-56.3 56.3v275.8a33.94 33.94 0 0 0 3.4 15c12.2 24.6 60.2 103.7 197.9 164.5V622.1a313.29 313.29 0 0 1-53.8-4.4zM656.85 289h-144.9v119.1a56.86 56.86 0 0 1 35.7 101.4l18.8 107.8A320.58 320.58 0 0 1 512 622v178.6c137.5-60.5 185.7-139.9 197.9-164.5a33.94 33.94 0 0 0 3.4-15V345.5a56 56 0 0 0-16.4-40 56.76 56.76 0 0 0-40.05-16.5z" style="fill:#fff"></path> </g></svg>
@@ -156,14 +156,14 @@
         <section class="my-5">
             <div class="container text-center">
                 <div class="row grid row-gap-5">
-                    <div class="col-md-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 d-flex justify-content-center">
                         <div class="my-card my-add-card" id="add-web">
                             <svg viewBox="0 -0.5 9 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-345.000000, -206.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <polygon id="plus_mini-[#1523]" points="298 49 298 51 294.625 51 294.625 54 292.375 54 292.375 51 289 51 289 49 292.375 49 292.375 46 294.625 46 294.625 49"> </polygon> </g> </g> </g> </g></svg>
                         </div>
                     </div>
                     <% if(locals.records) {%>
                         <% records.forEach(record => { %>
-                            <div class="col-md-3">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 d-flex justify-content-center">
                                 <div class="my-card">
                                     <div class="my-card-details">
                                         <p class="my-text-title" style="font-weight: 900;"><%= record.title %></p>
