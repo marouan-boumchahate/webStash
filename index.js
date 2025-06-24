@@ -6,11 +6,12 @@ import { promisify } from "util";
 import session from "express-session";
 import env from "dotenv";
 
-const app = express();
-const PORT = 8081;
-
-
 env.config();
+
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
