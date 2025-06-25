@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import { promisify } from "util";
 import session from "express-session";
 import env from "dotenv";
+import rateLimit from "express-rate-limit";
+import { title } from "process";
 
 env.config();
 
@@ -15,6 +17,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+app.use(rateLimit({
+    windowMs: 60 * 1000,
+    limit: 100
+}));
+
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
@@ -49,6 +56,20 @@ function createRenderBody(req){
 
 const serverErrorMessage = "Something went wrong with the server. Try Again Later!!";
 
+app.get("/marouan-only", (req, res) => {
+    db.all("SELECT * FROM webs ORDER BY id DESC", [], (err, rows) => {
+        if(err){
+            res.send("Something Went Wrong!!");
+        }
+        else {
+            let query = "INSERT INTO webs (id, title, link, description)\nVALUES\n";
+            rows.forEach(row => query += `(${row.id}, ${row.title}, ${row.link}, ${row.description}),`);
+
+            query = query.substring(0, query.length - 1) + ";";
+            res.send(query);
+        }
+    });   
+})
 
 app.get("/", (req, res) => {
     db.all("SELECT * FROM webs ORDER BY id DESC", [], (err, rows) => {
