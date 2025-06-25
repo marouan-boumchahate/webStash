@@ -21,7 +21,6 @@ app.use(rateLimit({
     windowMs: 60 * 1000,
     limit: 100
 }));
-
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
@@ -31,6 +30,16 @@ app.use(session({
         secure: false
     }
 }));
+
+// MIDDLEWARE CHECKS THAT THE ADMIN IS AUTHENTICATED
+function isAuthenticated(req, res, next) {
+    if(!req.session.authenticated){
+        req.session.errorMSG = "Admin access required to this option.";
+        return res.redirect("/");
+    }
+
+    next();
+}
 
 function initializeSession(req){
     req.session.records = null,
@@ -55,21 +64,6 @@ function createRenderBody(req){
 }
 
 const serverErrorMessage = "Something went wrong with the server. Try Again Later!!";
-
-app.get("/marouan-only", (req, res) => {
-    db.all("SELECT * FROM webs ORDER BY id DESC", [], (err, rows) => {
-        if(err){
-            res.send("Something Went Wrong!!");
-        }
-        else {
-            let query = "INSERT INTO webs (id, title, link, description)\nVALUES\n";
-            rows.forEach(row => query += `(${row.id}, ${row.title}, ${row.link}, ${row.description}),`);
-
-            query = query.substring(0, query.length - 1) + ";";
-            res.send(query);
-        }
-    });   
-})
 
 app.get("/", (req, res) => {
     db.all("SELECT * FROM webs ORDER BY id DESC", [], (err, rows) => {
@@ -131,16 +125,6 @@ app.post("/add", (req, res) => {
         res.redirect("/");
     });
 })
-
-// MIDDLEWARE CHECKS THAT THE ADMIN IS AUTHENTICATED
-function isAuthenticated(req, res, next) {
-    if(!req.session.authenticated){
-        req.session.errorMSG = "Admin access required to this option.";
-        return res.redirect("/");
-    }
-
-    next();
-}
 
 app.get("/update-web/:id", isAuthenticated, async (req, res) => {
     // if(!req.session.authenticated){
@@ -204,6 +188,22 @@ app.post("/delete/:id", isAuthenticated, async (req, res) => {
     }
 
     res.redirect("/");
+})
+
+
+app.get("/webstash-data", isAuthenticated, (req, res) => {
+    db.all("SELECT * FROM webs", [], (err, rows) => {
+        if(err){
+            res.send("Something Went Wrong!!");
+        }
+        else {
+            let query = "INSERT INTO webs (title, link, description)\nVALUES\n";
+            rows.forEach(row => query += `('${row.title}', '${row.link}', '${row.description}'),`);
+
+            query = query.substring(0, query.length - 1) + ";";
+            res.send(query);
+        }
+    });   
 })
 
 
