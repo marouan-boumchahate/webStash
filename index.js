@@ -6,7 +6,6 @@ import { promisify } from "util";
 import session from "express-session";
 import env from "dotenv";
 import rateLimit from "express-rate-limit";
-import { title } from "process";
 
 env.config();
 
@@ -19,7 +18,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.use(rateLimit({
     windowMs: 60 * 1000,
-    limit: 100
+    limit: 100,
+    message: "Too many requests, please try again later."
 }));
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
@@ -89,7 +89,6 @@ app.post("/search", (req, res) => {
         res.render("index.ejs", createRenderBody(req));
     }
     else {
-        console.log(rows);
         req.session.records = rows;
         res.render("index.ejs", createRenderBody(req));
 

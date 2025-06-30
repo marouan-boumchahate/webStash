@@ -1,5 +1,8 @@
 import sqlite3 from 'sqlite3';
 import bcrypt from 'bcrypt';
+import env from 'dotenv';
+
+env.config();
 
 const db = new sqlite3.Database('./var/db/webstash.db');
 
@@ -16,7 +19,7 @@ db.serialize(function () {
     )");   
     
 
-    bcrypt.hash("Marouan@Web@2003", 12)
+    bcrypt.hash(process.env.ADMIN_PASSWORD, 12)
         .then((hashedPassword) => {
             // This query ensures the password added only and only if the table is empty which means at the exact beginning of the program run
             const query = `
