@@ -78,7 +78,7 @@ webStash/
 │   ├── index.ejs       # Main page
 │   └── 404.ejs         # Error page
 ├── db.js               # Database configuration
-├── app.js              # Main application file
+├── index.js              # Main application file
 ├── package.json        # Project dependencies
 └── README.md          # Project documentation
 ```
@@ -152,5 +152,6 @@ If you have any thoughts, suggestions, or feedback, I'd love to hear them! Feel 
 ---
 
 ⭐ If you found this project helpful, please consider giving it a star on GitHub!
+
 
 
