@@ -33,9 +33,6 @@ Ever discovered amazing websites on social media, from friends, or while browsin
 - **express-session** - Session management
 - **express-rate-limit** - API protection
 
-### Deployment
-- **Railway** - Cloud hosting platform
-
 ## 🚦 Getting Started
 
 ### Prerequisites
@@ -155,4 +152,5 @@ If you have any thoughts, suggestions, or feedback, I'd love to hear them! Feel 
 ---
 
 ⭐ If you found this project helpful, please consider giving it a star on GitHub!
+
 
